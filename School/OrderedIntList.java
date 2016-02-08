@@ -63,7 +63,7 @@ public class OrderedIntList {
 				array[index] = array[index - 1];
 
 			//check for space in array or that insertion is less than greatest
-			if(counter < array.length - 1 || insertNum < array[counter])
+			//if(counter < array.length - 1 || insertNum < array[counter])
 				array[follow]= insertNum;
 
 			if(counter < this.size())
@@ -117,7 +117,7 @@ public class OrderedIntList {
 
 	public int length()
 	{
-		return counter - 1;
+		return counter;
 	}
 
 	/**
@@ -144,14 +144,14 @@ public class OrderedIntList {
 
 			//key is in upper half of array
 			if(searchArray[middle] < key)
-				search(searchArray, key, middle + 1, max);
+				return search(searchArray, key, middle + 1, max);
 
 			//key is in lower half of array
 			else if (searchArray[middle] > key)
-				search(searchArray, key, min, middle - 1);
+				return search(searchArray, key, min, middle - 1);
 
 			//key has been found
-			else if (searchArray[middle] == key)
+			else
 				keyLocation = middle;
 		}
 
@@ -166,9 +166,9 @@ public class OrderedIntList {
 
 	public void delete(int key)
 	{
-		int keyIndex = search(array, key, array[0], array[counter - 1]);
+		int keyIndex = search(array, key, 0, counter - 1);
 
-		for (int index = keyIndex; index < counter; index++)
+		for (int index = keyIndex; index < counter - 1; index++)
 			array[index] = array[index + 1];
 
 		counter--;
